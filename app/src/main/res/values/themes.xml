@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.WeatherCompose" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.WeatherCompose.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/android_thermometer</item>
+        <item name="windowSplashScreenAnimationDuration">100000</item>
+    </style>
 </resources>

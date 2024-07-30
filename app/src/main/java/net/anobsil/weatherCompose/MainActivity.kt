@@ -14,8 +14,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.anobsil.weatherCompose.data.viewmodel.MainViewmodel
 import net.anobsil.weatherCompose.ui.PullToRefreshLazyColumn
@@ -28,11 +28,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             WeatherComposeTheme {
                 var isRefreshing by remember { mutableStateOf(false) }
                 val weatherDataList = viewmodel.weatherData.observeAsState()
-                val scope = rememberCoroutineScope()
                 Box(modifier = Modifier.fillMaxSize()) {
                     PullToRefreshLazyColumn(
                         items = weatherDataList.value ?: emptyList(),
@@ -54,9 +54,8 @@ class MainActivity : ComponentActivity() {
                         },
                         isRefreshing = isRefreshing,
                         onRefresh = {
-                            scope.launch {
-                                isRefreshing = true
-                                viewmodel.postWeatherList()
+                            isRefreshing = true
+                            viewmodel.postWeatherList().invokeOnCompletion {
                                 isRefreshing = false
                             }
                         }

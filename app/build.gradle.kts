@@ -56,11 +56,11 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.gson)
     implementation(libs.okhttp)
-
     implementation(libs.hilt.android)
+    implementation(libs.androidx.constraintlayout)
     kapt(libs.hilt.compiler)
-
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -69,7 +69,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
+    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
