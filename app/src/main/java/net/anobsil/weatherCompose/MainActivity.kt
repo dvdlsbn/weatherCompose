@@ -28,12 +28,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition { viewmodel.keepOnScreen.value}
         setContent {
             WeatherComposeTheme {
                 var isRefreshing by remember { mutableStateOf(false) }
                 val weatherDataList = viewmodel.weatherData.observeAsState()
                 Box(modifier = Modifier.fillMaxSize()) {
+
                     PullToRefreshLazyColumn(
                         items = weatherDataList.value ?: emptyList(),
                         content = { weatherData ->
