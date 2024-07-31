@@ -18,12 +18,14 @@ import javax.inject.Inject
 class MainViewmodel @Inject constructor(val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
     private var _weatherData: MutableLiveData<List<WeatherData>> = MutableLiveData()
     val weatherData: LiveData<List<WeatherData>> = _weatherData
-    private var _keepOnScreen = mutableStateOf(true)
-    val keepOnScreen : State<Boolean> = _keepOnScreen
+    private var _keepSlpashOnScreen = mutableStateOf(true)
+    val keepSlpashOnScreen : State<Boolean> = _keepSlpashOnScreen
 
     init {
-        viewModelScope.launch { delay(3_000) }
-        _keepOnScreen.value = false
+        viewModelScope.launch {
+            delay(1_400)
+            _keepSlpashOnScreen.value = false
+        }
     }
 
     fun postWeatherList(city: String = "Paris") : Job = viewModelScope.launch {

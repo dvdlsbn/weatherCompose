@@ -4,6 +4,5 @@
     <style name="Theme.WeatherCompose.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/android_thermometer</item>
-        <item name="windowSplashScreenAnimationDuration">100000</item>
     </style>
 </resources>
