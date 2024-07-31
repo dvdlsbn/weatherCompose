@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
@@ -32,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherComposeTheme {
                 val pullToRefreshState = rememberPullToRefreshState()
-                Box {
+                Box(Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection)) {
                     var isRefreshing by remember { mutableStateOf(false) }
                     val weatherDataList = viewmodel.weatherData.observeAsState()
                     val onRefreshLambda: () -> Unit = {
@@ -42,7 +40,7 @@ class MainActivity : ComponentActivity() {
                                 isRefreshing = false
                             }
                     }
-                    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         Row(
                             modifier = Modifier
                                 .wrapContentHeight()
@@ -69,6 +67,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             },
+                            nestedScrollConnection = pullToRefreshState.nestedScrollConnection
                         )
                         if (pullToRefreshState.isRefreshing) {
                             LaunchedEffect(Unit) {
