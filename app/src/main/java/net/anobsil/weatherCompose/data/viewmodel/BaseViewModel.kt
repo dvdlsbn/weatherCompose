@@ -23,6 +23,7 @@ abstract class BaseViewModel<State : Reducer.ViewState, Event : Reducer.ViewEven
     private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
     val event: SharedFlow<Event>
 
+
         get() = _event.asSharedFlow()
 
     private val _effects = Channel<Effect>(capacity = Channel.CONFLATED)
